@@ -1,6 +1,6 @@
 
 module Pastebin
 	NAME = 'Pastebin'
-	VERSION = '0.1.0-dev'
+	VERSION = '1.0.0'
 	HOMEPAGE = 'https://github.com/TheFox/pastebin'
 end
