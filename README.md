@@ -58,6 +58,16 @@ The default settings file is under `~/.pastebinrc`. You need to create it by you
 
 	pastebin -r <ID>
 
+### Login
+
+As a registered pastebin.com user you can login an let `pastebin` create pastes on behalf of you. You need to enter your username and password. The login credentials are not stored to any configuration file or anywhere else.
+
+	pastebin --login
+
+After a successfull login you need to add the `API_USER_KEY=` line to your settings file (`~/.pastebinrc`). This user key is associated to your pastebin.com user.
+
+You can also use your own Developer API Key. See [pastebin.com API documentation](https://pastebin.com/api) for more details.
+
 ### Examples
 
 - `pastebin -n hello_world -e 10m -f hello_world.txt`
