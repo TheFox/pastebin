@@ -99,8 +99,6 @@ if ENV.has_key?('API_USER_KEY') && ENV['API_USER_KEY'] != ''
 end
 if !options.has_key?('api_paste_expire_date') && ENV.has_key?('API_PASTE_EXPIRE_DATE') && ENV['API_PASTE_EXPIRE_DATE'] != ''
 	options['api_paste_expire_date'] = ENV['API_PASTE_EXPIRE_DATE'].upcase
-	
-	puts 'env API_PASTE_EXPIRE_DATE: ' + options['api_paste_expire_date']
 end
 if !options.has_key?('api_paste_format') && ENV.has_key?('API_PASTE_FORMAT') && ENV['API_PASTE_FORMAT'] != ''
 	options['api_paste_format'] = ENV['API_PASTE_FORMAT']
