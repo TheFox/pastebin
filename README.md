@@ -18,7 +18,7 @@ Unless you are using `-f` the default input is [STDIN](https://en.wikipedia.org/
 
 The default settings file is under `~/.pastebinrc`. You need to create it by yourself.
 
-You can create a settings file with
+### Create a settings file
 
 	pastebin --skel > ~/.pastebinrc
 
