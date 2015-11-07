@@ -34,7 +34,7 @@ module Pastebin
 				@name_postfix = @options['name_postfix']
 			end
 			
-			if @options.has_key?('api_paste_name') && @options['api_paste_name'] != '' && @name_prefix != '' && @name_postfix != ''
+			if @options.has_key?('api_paste_name') && @options['api_paste_name'] != '' && (@name_prefix != '' || @name_postfix != '')
 				@options['api_paste_name'] = "#{@name_prefix}#{@options['api_paste_name']}#{@name_postfix}"
 			end
 		end
