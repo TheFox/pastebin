@@ -106,6 +106,12 @@ end
 if !options.has_key?('api_paste_private') && ENV.has_key?('API_PASTE_PRIVATE') && ENV['API_PASTE_PRIVATE'] != ''
 	options['api_paste_private'] = ENV['API_PASTE_PRIVATE']
 end
+if ENV.has_key?('NAME_PREFIX') && ENV['NAME_PREFIX'] != ''
+	options['name_prefix'] = ENV['NAME_PREFIX']
+end
+if ENV.has_key?('NAME_POSTFIX') && ENV['NAME_POSTFIX'] != ''
+	options['name_postfix'] = ENV['NAME_POSTFIX']
+end
 
 pastebin = Pastebin::Pastebin.new(options)
 

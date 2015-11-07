@@ -24,6 +24,19 @@ module Pastebin
 			if !@options.has_key?('api_paste_private')
 				@options['api_paste_private'] = '0'
 			end
+			
+			@name_prefix = ''
+			if @options.has_key?('name_prefix')
+				@name_prefix = @options['name_prefix']
+			end
+			@name_postfix = ''
+			if @options.has_key?('name_postfix')
+				@name_postfix = @options['name_postfix']
+			end
+			
+			if @options.has_key?('api_paste_name') && @options['api_paste_name'] != '' && @name_prefix != '' && @name_postfix != ''
+				@options['api_paste_name'] = "#{@name_prefix}#{@options['api_paste_name']}#{@name_postfix}"
+			end
 		end
 		
 		def login(username, password)
@@ -76,6 +89,8 @@ module Pastebin
 			puts 'API_PASTE_EXPIRE_DATE=n'
 			puts 'API_PASTE_FORMAT='
 			puts 'API_PASTE_PRIVATE=2'
+			puts 'NAME_PREFIX='
+			puts 'NAME_POSTFIX='
 		end
 		
 		def print_defaults
@@ -84,6 +99,8 @@ module Pastebin
 			puts "API_PASTE_EXPIRE_DATE=#{@options['api_paste_expire_date']}"
 			puts "API_PASTE_FORMAT=#{@options['api_paste_format']}"
 			puts "API_PASTE_PRIVATE=#{@options['api_paste_private']}"
+			puts "NAME_PREFIX=#{@name_prefix}"
+			puts "NAME_POSTFIX=#{@name_postfix}"
 		end
 	end
 	
