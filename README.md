@@ -60,7 +60,7 @@ The default settings file is under `~/.pastebinrc`. You need to create it by you
 
 ### Login
 
-As a registered pastebin.com user you can login an let `pastebin` create pastes on behalf of you. You need to enter your username and password. The login credentials are not stored to any configuration file or anywhere else.
+As a registered pastebin.com user you can login and let `pastebin` create pastes on behalf of you. You need to enter your username and password. The login credentials are not stored to any configuration file or anywhere else.
 
 	pastebin --login
 
