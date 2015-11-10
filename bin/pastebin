@@ -79,6 +79,12 @@ EOB
 		is_defaults_mode = true
 	end
 	
+	opts.on_tail('--version', 'Show version.') do
+		puts "#{Pastebin::NAME} #{Pastebin::VERSION}"
+		puts Pastebin::HOMEPAGE
+		exit
+	end
+	
 	opts.on_tail('-h', '--help', 'Show this message.') do
 		puts opts
 		exit 3
