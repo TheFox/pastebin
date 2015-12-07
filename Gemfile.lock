@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    thefox-pastebin (1.2.0.pre.dev)
+    thefox-pastebin (1.2.1)
       dotenv (~> 2.0)
       highline (~> 1.7)
 
