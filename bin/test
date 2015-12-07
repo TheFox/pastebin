@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+puts 'cwd: ' + Dir.pwd
+
+#require 'bundler/setup'
+
+
+
+
+
+require 'rubygems'
+#require 'dotenv'
+
+gem 'pastebin'
+
+puts
+puts $:.join("\n")
+puts
+
+
+
+
+

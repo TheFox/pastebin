@@ -3,7 +3,7 @@
 		{
 			"path": ".",
 			"name": "Pastebin",
-			"folder_exclude_patterns": [ "vendor" ],
+			"folder_exclude_patterns": [ ],
 			"file_exclude_patterns": [ ]
 		}
 	]

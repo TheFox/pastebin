@@ -1,4 +1,3 @@
-/.bundle/
+.setup
 CHANGELOG-*.txt
-Gemfile.lock
-/vendor/
+/releases/

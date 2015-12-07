@@ -1,14 +1,10 @@
 #!/usr/bin/env ruby
 # coding: UTF-8
 
-# WHY? WHHHHHYY is there no other solution
-# to load requirements from the project directory?
-Dir.chdir(File.expand_path('..', __dir__)) do
-	require 'bundler/setup'
-	require 'dotenv'
-	require 'pastebin'
-	require 'highline/import'
-end
+require 'bundler/setup'
+require 'dotenv'
+require 'pastebin'
+require 'highline/import'
 
 rc_path = "#{ENV['HOME']}/.pastebinrc" # runtime configuration
 raw_id = nil
@@ -80,8 +76,8 @@ EOB
 	end
 	
 	opts.on_tail('--version', 'Show version.') do
-		puts "#{Pastebin::NAME} #{Pastebin::VERSION}"
-		puts Pastebin::HOMEPAGE
+		puts "#{TheFox::Pastebin::NAME} #{TheFox::Pastebin::VERSION} (#{TheFox::Pastebin::DATE})"
+		puts TheFox::Pastebin::HOMEPAGE
 		exit
 	end
 	
@@ -119,7 +115,7 @@ if ENV.has_key?('NAME_POSTFIX') && ENV['NAME_POSTFIX'] != ''
 	options['name_postfix'] = ENV['NAME_POSTFIX']
 end
 
-pastebin = Pastebin::Pastebin.new(options)
+pastebin = TheFox::Pastebin::Pastebin.new(options)
 
 begin
 	if is_login_mode

@@ -4,6 +4,21 @@ Command line interface for [Pastebin.com](https://pastebin.com/).
 
 Just another Pastebin.com CLI script, but you can even login with your user account.
 
+## Install
+
+The preferred method of installation is via RubyGems.org:  
+<https://rubygems.org/gems/thefox-pastebin>
+
+	gem install thefox-pastebin
+
+or via `Gemfile`:
+
+	gem 'thefox-pastebin', '~>1.2'
+
+Use it in your sources:
+
+	require 'thefox-pastebin'
+
 ## Usage
 
 Unless you are using `-f` the default input is [STDIN](https://en.wikipedia.org/wiki/Standard_streams).
