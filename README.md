@@ -92,6 +92,11 @@ You can also use your own Developer API Key. See [pastebin.com API documentation
 - `pastebin -r UJwPUmKp`
 - `cat /tmp/hello_world.txt | pastebin`
 
+## Project Links
+
+- [Gem](https://rubygems.org/gems/thefox-pastebin)
+- [Travis CI Repository](https://travis-ci.org/TheFox/pastebin)
+
 ## License
 Copyright (C) 2015 Christian Mayer <http://fox21.at>
 
