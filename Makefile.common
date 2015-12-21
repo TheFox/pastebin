@@ -1,21 +1,22 @@
 
 # Ruby Common Big
-# 2015-12-07
+# 2015-12-21
 
 MV = mv -nv
 RM = rm -rf
 MKDIR = mkdir -p
 BUNDLER = bundle
+BUNDLER_OPTIONS = --jobs=5 --retry=3
 GEMSPEC_FILE = $(GEM_NAME).gemspec
 
-.PHONY: all
+.PHONY: all $(ALL_TARGETS_EXT)
 all: setup
 
 .PHONY: setup
 setup: .setup
 
 .setup:
-	$(BUNDLER) install
+	$(BUNDLER) install $(BUNDLER_OPTIONS)
 	touch $@
 
 .PHONY: install
@@ -34,7 +35,9 @@ update:
 
 .PHONY: clean
 clean:
+	$(RM) .bundle
 	$(RM) .setup
+	$(RM) Gemfile.lock
 
 .PHONY: release
 release: | releases

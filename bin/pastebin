@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 # coding: UTF-8
 
-require 'bundler/setup'
 require 'dotenv'
 require 'pastebin'
 require 'highline/import'
+
 
 rc_path = "#{ENV['HOME']}/.pastebinrc" # runtime configuration
 raw_id = nil
@@ -15,8 +15,8 @@ is_defaults_mode = false
 
 options = {}
 
-opts = OptionParser.new do |opts|
-	opts.banner =<<EOB
+opts = OptionParser.new do |o|
+	o.banner =<<EOB
 Pastebin is a CLI to https://pastebin.com
 Usage: pastebin [options]
 
@@ -25,63 +25,63 @@ Examples:
 	cat foo.rb | pastebin -l ruby
 EOB
 	
-	opts.separator('')
-	opts.separator('Options:')
+	o.separator('')
+	o.separator('Options:')
 	
-	opts.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |f|
+	o.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |f|
 		rc_path = f
 	end
 	
-	opts.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |f|
+	o.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |f|
 		options["api_paste_code"] = f
 	end
 	
-	opts.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |n|
+	o.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |n|
 		options['api_paste_name'] = n
 	end
 	
 	expire_a = ['n', '10m', '1h', '1d', '1m']
 	expire_s = expire_a.join(', ')
-	opts.on('-e', '--expire <time>', expire_a, 'These can be abbriviated, as long as they are unambigous.', "#{expire_s}", 'Default: n (never)' ) do |e|
+	o.on('-e', '--expire <time>', expire_a, 'These can be abbriviated, as long as they are unambigous.', "#{expire_s}", 'Default: n (never)' ) do |e|
 		options['api_paste_expire_date'] = e.upcase
 	end
 	
-	opts.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |l|
+	o.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |l|
 		options['api_paste_format'] = l
 	end
 	
-	opts.on('-u', '--unlisted', 'Make paste unlisted. (API_PASTE_PRIVATE=1)') do
+	o.on('-u', '--unlisted', 'Make paste unlisted. (API_PASTE_PRIVATE=1)') do
 		options['api_paste_private'] = '1'
 	end
 	
-	opts.on('-p', '--private', 'Make paste private.  (API_PASTE_PRIVATE=2)') do
+	o.on('-p', '--private', 'Make paste private.  (API_PASTE_PRIVATE=2)') do
 		options['api_paste_private'] = '2'
 	end
 	
-	opts.on('-r', '--raw <link>', String, 'Return raw text from a paste link.') do |r|
+	o.on('-r', '--raw <link>', String, 'Return raw text from a paste link.') do |r|
 		is_raw_mode = true
 		raw_id = r
 	end
 	
-	opts.on_tail(nil, '--login', 'Login on pastebin.com with your user credentials.') do
+	o.on_tail(nil, '--login', 'Login on pastebin.com with your user credentials.') do
 		is_login_mode = true
 	end
 	
-	opts.on_tail(nil, '--skel', 'Print a basic example configuration.') do
+	o.on_tail(nil, '--skel', 'Print a basic example configuration.') do
 		is_skel_mode = true
 	end
 	
-	opts.on('-D', '--defaults', String, 'Print defaults.') do |r|
+	o.on('-D', '--defaults', String, 'Print defaults.') do |r|
 		is_defaults_mode = true
 	end
 	
-	opts.on_tail('--version', 'Show version.') do
+	o.on_tail('--version', 'Show version.') do
 		puts "#{TheFox::Pastebin::NAME} #{TheFox::Pastebin::VERSION} (#{TheFox::Pastebin::DATE})"
 		puts TheFox::Pastebin::HOMEPAGE
 		exit
 	end
 	
-	opts.on_tail('-h', '--help', 'Show this message.') do
+	o.on_tail('-h', '--help', 'Show this message.') do
 		puts opts
 		exit 3
 	end
