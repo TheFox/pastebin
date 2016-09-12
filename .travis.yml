@@ -5,6 +5,7 @@ rvm:
     - 2.1
     - 2.2
     - 2.3
+    - ruby-head
 sudo: required
 before_install:
     - gem update --system
