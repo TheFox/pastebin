@@ -10,30 +10,12 @@ module TheFox
 			API_DEV_KEY = 'd46f57321035e4a1eba3ce9b1a70d3cd'
 			
 			def initialize(options = {})
-				if options.nil?
-					options = {}
-				else
-					@options = options
-				end
-				
-				if !@options.has_key?('api_dev_key')
-					@options['api_dev_key'] = API_DEV_KEY
-				end
-				if !@options.has_key?('api_paste_expire_date')
-					@options['api_paste_expire_date'] = 'N'
-				end
-				if !@options.has_key?('api_paste_private')
-					@options['api_paste_private'] = '0'
-				end
-				
-				@name_prefix = ''
-				if @options.has_key?('name_prefix')
-					@name_prefix = @options['name_prefix']
-				end
-				@name_postfix = ''
-				if @options.has_key?('name_postfix')
-					@name_postfix = @options['name_postfix']
-				end
+				@options = options
+				@options['api_dev_key'] ||= API_DEV_KEY
+				@options['api_paste_expire_date'] ||= 'N'
+				@options['api_paste_private'] ||= '0'
+				@name_prefix = @options['name_prefix'] || ''
+				@name_postfix = @options['name_postfix'] || ''
 				
 				if @options.has_key?('api_paste_name') && @options['api_paste_name'] != '' && (@name_prefix != '' || @name_postfix != '')
 					@options['api_paste_name'] = "#{@name_prefix}#{@options['api_paste_name']}#{@name_postfix}"
@@ -47,10 +29,8 @@ module TheFox
 				uri = URI.parse('https://pastebin.com/api/api_login.php')
 				res = Net::HTTP.post_form(uri, @options)
 				
-				if res.code.to_i == 200
-					if /^[a-f0-9]{32}$/.match(res.body)
-						return res.body
-					end
+				if res.code.to_i == 200 && /^[a-f0-9]{32}$/.match(res.body)
+					return res.body
 				end
 				
 				raise res.body
@@ -74,9 +54,9 @@ module TheFox
 				if @options.has_key?('api_paste_code') && @options['api_paste_code']
 					uri = URI.parse('https://pastebin.com/api/api_post.php')
 					return Net::HTTP.post_form(uri, @options).body
-				else
-					raise 'no code to paste'
 				end
+				
+				raise 'no code to paste'
 			end
 			
 			def raw(id)

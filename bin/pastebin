@@ -93,27 +93,15 @@ if File.exist?(rc_path)
 	Dotenv.load(rc_path)
 end
 
-if ENV.has_key?('API_DEV_KEY') && ENV['API_DEV_KEY'] != ''
-	options['api_dev_key'] = ENV['API_DEV_KEY']
-end
-if ENV.has_key?('API_USER_KEY') && ENV['API_USER_KEY'] != ''
-	options['api_user_key'] = ENV['API_USER_KEY']
-end
+options['api_dev_key'] ||= ENV['API_DEV_KEY']
+options['api_user_key'] ||= ENV['API_USER_KEY']
 if !options.has_key?('api_paste_expire_date') && ENV.has_key?('API_PASTE_EXPIRE_DATE') && ENV['API_PASTE_EXPIRE_DATE'] != ''
 	options['api_paste_expire_date'] = ENV['API_PASTE_EXPIRE_DATE'].upcase
 end
-if !options.has_key?('api_paste_format') && ENV.has_key?('API_PASTE_FORMAT') && ENV['API_PASTE_FORMAT'] != ''
-	options['api_paste_format'] = ENV['API_PASTE_FORMAT']
-end
-if !options.has_key?('api_paste_private') && ENV.has_key?('API_PASTE_PRIVATE') && ENV['API_PASTE_PRIVATE'] != ''
-	options['api_paste_private'] = ENV['API_PASTE_PRIVATE']
-end
-if ENV.has_key?('NAME_PREFIX') && ENV['NAME_PREFIX'] != ''
-	options['name_prefix'] = ENV['NAME_PREFIX']
-end
-if ENV.has_key?('NAME_POSTFIX') && ENV['NAME_POSTFIX'] != ''
-	options['name_postfix'] = ENV['NAME_POSTFIX']
-end
+options['api_paste_format'] ||= ENV['API_PASTE_FORMAT']
+options['api_paste_private'] ||= ENV['API_PASTE_PRIVATE']
+options['name_prefix'] ||= ENV['NAME_PREFIX']
+options['name_postfix'] ||= ENV['NAME_POSTFIX']
 
 pastebin = TheFox::Pastebin::Pastebin.new(options)
 
