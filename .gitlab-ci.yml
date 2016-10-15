@@ -1,0 +1,66 @@
+before_script:
+    - ruby -v
+    - gem update --system
+    - gem install bundler -v '~>1.13'
+    - bundler --version
+    - make
+
+stages:
+    - test
+    - release
+
+test_19:
+    image: ruby:1.9
+    stage: test
+    environment: test
+    only:
+        - master
+    script:
+        - make test
+
+test_20:
+    image: ruby:2.0
+    stage: test
+    environment: test
+    only:
+        - master
+    script:
+        - make test
+
+test_21:
+    image: ruby:2.1
+    stage: test
+    environment: test
+    only:
+        - master
+    script:
+        - make test
+
+test_22:
+    image: ruby:2.2
+    stage: test
+    environment: test
+    only:
+        - master
+    script:
+        - make test
+
+test_23:
+    image: ruby:2.3
+    stage: test
+    environment: test
+    only:
+        - master
+    script:
+        - make test
+
+release_gem:
+    image: ruby:2.3
+    stage: release
+    environment: release
+    only:
+        - tags
+    script:
+        - mkdir -p ~/.gem
+        - 'printf "%s\n:rubygems_api_key: %s" "---" "${RUBYGEMSORG_API_KEY}" > ~/.gem/credentials; chmod 0600 ~/.gem/credentials'
+        - make release
