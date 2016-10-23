@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
 # coding: UTF-8
 
+require 'pathname'
 require 'dotenv'
-require 'pastebin'
 require 'highline/import'
+require 'pastebin'
 
 
-rc_path = "#{ENV['HOME']}/.pastebinrc" # runtime configuration
+rc_path = Pathname.new("#{ENV['HOME']}/.pastebinrc") # runtime configuration
 raw_id = nil
 is_login_mode = false
 is_raw_mode = false
 is_skel_mode = false
 is_defaults_mode = false
 
-options = {}
-
+options = Hash.new
 opts = OptionParser.new do |o|
 	o.banner =<<EOB
 Pastebin is a CLI to https://pastebin.com
@@ -28,16 +28,16 @@ EOB
 	o.separator('')
 	o.separator('Options:')
 	
-	o.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |f|
-		rc_path = f
+	o.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |path|
+		rc_path = Pathname.new(path)
 	end
 	
-	o.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |f|
-		options["api_paste_code"] = f
+	o.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |path|
+		options['api_paste_code'] = Pathname.new(path)
 	end
 	
-	o.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |n|
-		options['api_paste_name'] = n
+	o.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |name|
+		options['api_paste_name'] = name
 	end
 	
 	expire_a = ['n', '10m', '1h', '1d', '1m']
@@ -46,8 +46,8 @@ EOB
 		options['api_paste_expire_date'] = e.upcase
 	end
 	
-	o.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |l|
-		options['api_paste_format'] = l
+	o.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |language|
+		options['api_paste_format'] = language
 	end
 	
 	o.on('-u', '--unlisted', 'Make paste unlisted. (API_PASTE_PRIVATE=1)') do
@@ -63,11 +63,11 @@ EOB
 		raw_id = r
 	end
 	
-	o.on_tail(nil, '--login', 'Login on pastebin.com with your user credentials.') do
+	o.on_tail('--login', 'Login on pastebin.com with your user credentials.') do
 		is_login_mode = true
 	end
 	
-	o.on_tail(nil, '--skel', 'Print a basic example configuration.') do
+	o.on_tail('--skel', 'Print a basic example configuration.') do
 		is_skel_mode = true
 	end
 	
@@ -86,12 +86,9 @@ EOB
 		exit 3
 	end
 end
-
 opts.parse(ARGV)
 
-if File.exist?(rc_path)
-	Dotenv.load(rc_path)
-end
+Dotenv.load(rc_path)
 
 options['api_dev_key'] ||= ENV['API_DEV_KEY']
 options['api_user_key'] ||= ENV['API_USER_KEY']
