@@ -56,7 +56,7 @@ test_23:
 release_gem:
     image: ruby:2.3
     stage: release
-    environment: release
+    environment: gem
     only:
         - tags
     script:
