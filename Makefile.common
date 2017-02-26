@@ -1,12 +1,11 @@
 
-# Ruby Common Big
-# 2016-05-20
+# Ruby Common Big 2016-11-08
 
 MV = mv -nv
 RM = rm -rfd
 MKDIR = mkdir -p
 CHMOD = chmod
-BUNDLER = bundle
+BUNDLER = bundler
 BUNDLER_OPTIONS = --jobs=5 --retry=3
 GEMSPEC_FILE = $(GEM_NAME).gemspec
 
@@ -17,18 +16,21 @@ all: setup $(ALL_TARGETS_EXT)
 setup: .setup
 
 .setup:
+	which ruby &> /dev/null
+	which $(BUNDLER) &> /dev/null
+	ruby -v
 	$(BUNDLER) install $(BUNDLER_OPTIONS)
 	touch $@
 
 .PHONY: install
 install:
-	gem_file=$$(gem build $(GEMSPEC_FILE) | grep 'File:' | tail -1 | awk '{ print $$2 }'); \
-	sudo gem install $$gem_file; \
+	gem_file=$$(gem build $(GEMSPEC_FILE) 2> /dev/null | grep 'File:' | tail -1 | awk '{ print $$2 }'); \
+	gem install $$gem_file; \
 	$(RM) $$gem_file
 
 .PHONY: uninstall
 uninstall:
-	sudo gem uninstall $(GEM_NAME)
+	gem uninstall $(GEM_NAME)
 
 .PHONY: update
 update:
