@@ -54,7 +54,7 @@ test_23:
     script:
         - make test
 
-release_gem:
+release:
     image: ruby:2.3
     stage: release
     environment: release
