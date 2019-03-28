@@ -40,13 +40,13 @@ Unless you are using `-f` the default input is [STDIN](https://en.wikipedia.org/
 ### Help
 
 ```bash
-pastebin -h
+$ pastebin -h
 ```
 
 ### Skel example
 
 ```bash
-pastebin --skel
+$ pastebin --skel
 ```
 
 The default settings file is under `~/.pastebinrc`. You need to create it by yourself.
@@ -54,61 +54,61 @@ The default settings file is under `~/.pastebinrc`. You need to create it by you
 ### Create a settings file
 
 ```bash
-pastebin --skel > ~/.pastebinrc
+$ pastebin --skel > ~/.pastebinrc
 ```
 
 ### Print default settings
 
 ```bash
-pastebin -D
+$ pastebin -D
 ```
 
 ### Use a different settings file
 
 ```bash
-pastebin -c ~/.pastebinrc_user2
+$ pastebin -c ~/.pastebinrc_user2
 ```
 
 ### Set a name for a paste
 
 ```bash
-pastebin -n 'hello world'
+$ pastebin -n 'hello world'
 ```
 
 ### Set an expiration date for a paste (10 minutes)
 
 ```bash
-pastebin -e 10m
+$ pastebin -e 10m
 ```
 
 ### Set a format/language for a paste (PHP)
 
 ```bash
-pastebin -l php
+$ pastebin -l php
 ```
 
 ### Paste a specific file
 
 ```bash
-pastebin -f file.txt
+$ pastebin -f file.txt
 ```
 
 ### Create an unlisted paste
 
 ```bash
-pastebin -u
+$ pastebin -u
 ```
 
 ### Create a private paste
 
 ```bash
-pastebin -p
+$ pastebin -p
 ```
 
 ### Get the raw contents of a paste
 
 ```bash
-pastebin -r <ID>
+$ pastebin -r <ID>
 ```
 
 ### Login
@@ -116,7 +116,7 @@ pastebin -r <ID>
 As a registered pastebin.com user you can login and let `pastebin` create pastes on behalf of you. You need to enter your username and password. The login credentials are not stored to any configuration file or anywhere else.
 
 ```bash
-pastebin --login
+$ pastebin --login
 ```
 
 After a successfull login you need to add the `API_USER_KEY=` line to your settings file (`~/.pastebinrc`). This user key is associated to your pastebin.com user.
