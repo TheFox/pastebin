@@ -4,24 +4,32 @@ Command line interface for [Pastebin.com](https://pastebin.com/).
 
 Just another Pastebin.com CLI script, but you can even login with your user account.
 
-## Install
+## Project Outlines
+
+The project outlines as described in my blog post about [Open Source Software Collaboration](https://blog.fox21.at/2019/02/21/open-source-software-collaboration.html).
+
+- The main purpose of this software is to provide a command-line interface to pastebin.com.
+- The features should not go beyond pastebin.com's features and functions. So the features of this software are limited to those of pastebin.com.
+- This list is open. Feel free to request features.
+
+## Installation
 
 The preferred method of installation is via RubyGems.org:  
 <https://rubygems.org/gems/thefox-pastebin>
 
 ```bash
-gem install thefox-pastebin
+$ gem install thefox-pastebin
 ```
 
 or via `Gemfile`:
 
-```bash
+```ruby
 gem 'thefox-pastebin', '~>1.2'
 ```
 
 Use it in your sources:
 
-```bash
+```ruby
 require 'thefox-pastebin'
 ```
 
