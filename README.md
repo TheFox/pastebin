@@ -135,7 +135,6 @@ You can also use your own Developer API Key. See [pastebin.com API documentation
 ## Project Links
 
 - [Gem](https://rubygems.org/gems/thefox-pastebin)
-- [Travis CI Repository](https://travis-ci.org/TheFox/pastebin)
 
 ## License
 
