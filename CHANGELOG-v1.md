@@ -1,5 +1,10 @@
 # Release Notes for Pastebin v1.x
 
+## v1.3.0 [unreleased]
+
+- MIT License
+- Remove Travis CI support.
+
 ## v1.2.2
 
 - Dependency fixes.

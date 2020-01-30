@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 	spec.summary       = %q{Pastebin.com CLI}
 	spec.description   = %q{Just another Pastebin.com CLI script, but you can even login with your user account.}
 	spec.homepage      = TheFox::Pastebin::HOMEPAGE
-	spec.license       = 'GPL-3.0'
+	spec.license       = 'MIT'
 	
 	spec.files         = `git ls-files -z`.split("\x0").reject{ |f| f.match(%r{^(test|spec|features)/}) }
 	spec.bindir        = 'bin'
