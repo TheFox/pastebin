@@ -4,6 +4,7 @@
 
 - MIT License
 - Remove Travis CI support.
+- Use 2 spaces for indentions.
 
 ## v1.2.2
 

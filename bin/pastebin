@@ -16,75 +16,75 @@ is_defaults_mode = false
 
 options = Hash.new
 opts = OptionParser.new do |o|
-	o.banner =<<EOB
+  o.banner =<<EOB
 Pastebin is a CLI to https://pastebin.com
 Usage: pastebin [options]
 
 Examples:
-	pastebin -f foo.rb -n rub_script -l ruby -e 10m
-	cat foo.rb | pastebin -l ruby
+  pastebin -f foo.rb -n rub_script -l ruby -e 10m
+  cat foo.rb | pastebin -l ruby
 EOB
-	
-	o.separator('')
-	o.separator('Options:')
-	
-	o.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |path|
-		rc_path = Pathname.new(path)
-	end
-	
-	o.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |path|
-		options['api_paste_code'] = Pathname.new(path)
-	end
-	
-	o.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |name|
-		options['api_paste_name'] = name
-	end
-	
-	expire_a = ['n', '10m', '1h', '1d', '1m']
-	expire_s = expire_a.join(', ')
-	o.on('-e', '--expire <time>', expire_a, 'These can be abbriviated, as long as they are unambigous.', "#{expire_s}", 'Default: n (never)' ) do |e|
-		options['api_paste_expire_date'] = e.upcase
-	end
-	
-	o.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |language|
-		options['api_paste_format'] = language
-	end
-	
-	o.on('-u', '--unlisted', 'Make paste unlisted. (API_PASTE_PRIVATE=1)') do
-		options['api_paste_private'] = '1'
-	end
-	
-	o.on('-p', '--private', 'Make paste private.  (API_PASTE_PRIVATE=2)') do
-		options['api_paste_private'] = '2'
-	end
-	
-	o.on('-r', '--raw <link>', String, 'Return raw text from a paste link.') do |r|
-		is_raw_mode = true
-		raw_id = r
-	end
-	
-	o.on_tail('--login', 'Login on pastebin.com with your user credentials.') do
-		is_login_mode = true
-	end
-	
-	o.on_tail('--skel', 'Print a basic example configuration.') do
-		is_skel_mode = true
-	end
-	
-	o.on('-D', '--defaults', String, 'Print defaults.') do |r|
-		is_defaults_mode = true
-	end
-	
-	o.on_tail('--version', 'Show version.') do
-		puts "#{TheFox::Pastebin::NAME} #{TheFox::Pastebin::VERSION} (#{TheFox::Pastebin::DATE})"
-		puts TheFox::Pastebin::HOMEPAGE
-		exit
-	end
-	
-	o.on_tail('-h', '--help', 'Show this message.') do
-		puts opts
-		exit 3
-	end
+  
+  o.separator('')
+  o.separator('Options:')
+  
+  o.on('-c <file>', '--config <file>', String, "Used config file.", "Default: #{rc_path}") do |path|
+    rc_path = Pathname.new(path)
+  end
+  
+  o.on('-f <file>', '--file <file>', String, "Use a file for input, '-' for STDIN.") do |path|
+    options['api_paste_code'] = Pathname.new(path)
+  end
+  
+  o.on('-n', '--name <name>', String, 'Assign a name to your paste.') do |name|
+    options['api_paste_name'] = name
+  end
+  
+  expire_a = ['n', '10m', '1h', '1d', '1m']
+  expire_s = expire_a.join(', ')
+  o.on('-e', '--expire <time>', expire_a, 'These can be abbriviated, as long as they are unambigous.', "#{expire_s}", 'Default: n (never)' ) do |e|
+    options['api_paste_expire_date'] = e.upcase
+  end
+  
+  o.on('-l', '--language <syntax>', String, "See https://pastebin.com/api - The 'api_paste_format' Paramater.") do |language|
+    options['api_paste_format'] = language
+  end
+  
+  o.on('-u', '--unlisted', 'Make paste unlisted. (API_PASTE_PRIVATE=1)') do
+    options['api_paste_private'] = '1'
+  end
+  
+  o.on('-p', '--private', 'Make paste private.  (API_PASTE_PRIVATE=2)') do
+    options['api_paste_private'] = '2'
+  end
+  
+  o.on('-r', '--raw <link>', String, 'Return raw text from a paste link.') do |r|
+    is_raw_mode = true
+    raw_id = r
+  end
+  
+  o.on_tail('--login', 'Login on pastebin.com with your user credentials.') do
+    is_login_mode = true
+  end
+  
+  o.on_tail('--skel', 'Print a basic example configuration.') do
+    is_skel_mode = true
+  end
+  
+  o.on('-D', '--defaults', String, 'Print defaults.') do |r|
+    is_defaults_mode = true
+  end
+  
+  o.on_tail('--version', 'Show version.') do
+    puts "#{TheFox::Pastebin::NAME} #{TheFox::Pastebin::VERSION} (#{TheFox::Pastebin::DATE})"
+    puts TheFox::Pastebin::HOMEPAGE
+    exit
+  end
+  
+  o.on_tail('-h', '--help', 'Show this message.') do
+    puts opts
+    exit 3
+  end
 end
 opts.parse(ARGV)
 
@@ -93,7 +93,7 @@ Dotenv.load(rc_path)
 options['api_dev_key'] ||= ENV['API_DEV_KEY']
 options['api_user_key'] ||= ENV['API_USER_KEY']
 if !options.has_key?('api_paste_expire_date') && ENV.has_key?('API_PASTE_EXPIRE_DATE') && ENV['API_PASTE_EXPIRE_DATE'] != ''
-	options['api_paste_expire_date'] = ENV['API_PASTE_EXPIRE_DATE'].upcase
+  options['api_paste_expire_date'] = ENV['API_PASTE_EXPIRE_DATE'].upcase
 end
 options['api_paste_format'] ||= ENV['API_PASTE_FORMAT']
 options['api_paste_private'] ||= ENV['API_PASTE_PRIVATE']
@@ -103,36 +103,36 @@ options['name_postfix'] ||= ENV['NAME_POSTFIX']
 pastebin = TheFox::Pastebin::Pastebin.new(options)
 
 begin
-	if is_login_mode
-		api_user_name = ask('Username: ') do |q|
-			q.validate = /^./
-		end
-		api_user_password = ask('Password: ') do |q|
-			q.echo = '*'
-			q.validate = /^./
-		end
-		
-		api_user_key = pastebin.login(api_user_name, api_user_password)
-		
-		puts
-		puts 'Login OK.'
-		puts
-		puts "Now you need to set your key to '#{rc_path}'."
-		puts 'Like this:'
-		puts "API_USER_KEY=#{api_user_key}"
-		puts
-	elsif is_raw_mode
-		if !raw_id.nil?
-			print pastebin.raw(raw_id)
-		end
-	elsif is_skel_mode
-		pastebin.print_skel
-	elsif is_defaults_mode
-		pastebin.print_defaults
-	else
-		puts pastebin.paste
-	end
+  if is_login_mode
+    api_user_name = ask('Username: ') do |q|
+      q.validate = /^./
+    end
+    api_user_password = ask('Password: ') do |q|
+      q.echo = '*'
+      q.validate = /^./
+    end
+    
+    api_user_key = pastebin.login(api_user_name, api_user_password)
+    
+    puts
+    puts 'Login OK.'
+    puts
+    puts "Now you need to set your key to '#{rc_path}'."
+    puts 'Like this:'
+    puts "API_USER_KEY=#{api_user_key}"
+    puts
+  elsif is_raw_mode
+    if !raw_id.nil?
+      print pastebin.raw(raw_id)
+    end
+  elsif is_skel_mode
+    pastebin.print_skel
+  elsif is_defaults_mode
+    pastebin.print_defaults
+  else
+    puts pastebin.paste
+  end
 rescue Exception => e
-	puts "ERROR: #{e}"
-	exit 1
+  puts "ERROR: #{e}"
+  exit 1
 end

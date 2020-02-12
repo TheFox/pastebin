@@ -1,5 +1,6 @@
 /.bundle/
+.env
 .setup
 CHANGELOG-*.txt
 Gemfile.lock
-/releases/
+/tmp/
