@@ -125,12 +125,14 @@ You can also use your own Developer API Key. See [pastebin.com API documentation
 
 ### Examples
 
-- `pastebin -n hello_world -e 10m -f hello_world.txt`
-- `pastebin -n 'PHP Script' -l php -f login.php`
-- `pastebin -u -e 1m -l php -f test.php`
-- `pastebin -n 'Collect Script' -p -e 10m -l awk -f collect.awk`
-- `pastebin -r UJwPUmKp`
-- `cat /tmp/hello_world.txt | pastebin`
+```bash
+pastebin -n hello_world -e 10m -f hello_world.txt
+pastebin -n 'PHP Script' -l php -f login.php
+pastebin -u -e 1m -l php -f test.php
+pastebin -n 'Collect Script' -p -e 10m -l awk -f collect.awk
+pastebin -r UJwPUmKp
+cat /tmp/hello_world.txt | pastebin
+```
 
 ## Project Links
 
