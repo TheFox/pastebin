@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-# coding: UTF-8
-
-require 'pry'
-require 'pastebin'
-
-binding.pry

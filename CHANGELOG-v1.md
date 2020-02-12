@@ -5,6 +5,7 @@
 - MIT License
 - Remove Travis CI support.
 - Use 2 spaces for indentions.
+- Remove Make files.
 
 ## v1.2.2
 

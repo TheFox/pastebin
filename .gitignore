@@ -4,3 +4,4 @@
 CHANGELOG-*.txt
 Gemfile.lock
 /tmp/
+*.gem

@@ -8,6 +8,15 @@ stages:
   - test
   - release
 
+test_dev:
+  image: ruby:1.9
+  stage: test
+  environment: test
+  only:
+    - master
+  script:
+    - ./bin/test.sh
+
 test_19:
   image: ruby:1.9
   stage: test
@@ -15,7 +24,7 @@ test_19:
   only:
     - tags
   script:
-    - make test
+    - ./bin/test.sh
 
 test_20:
   image: ruby:2.0
@@ -24,7 +33,7 @@ test_20:
   only:
     - tags
   script:
-    - make test
+    - ./bin/test.sh
 
 test_21:
   image: ruby:2.1
@@ -33,7 +42,7 @@ test_21:
   only:
     - tags
   script:
-    - make test
+    - ./bin/test.sh
 
 test_22:
   image: ruby:2.2
@@ -42,7 +51,7 @@ test_22:
   only:
     - tags
   script:
-    - make test
+    - ./bin/test.sh
 
 test_23:
   image: ruby:2.3
@@ -51,7 +60,7 @@ test_23:
   only:
     - tags
   script:
-    - make test
+    - ./bin/test.sh
 
 release:
   image: ruby:2.3
@@ -61,5 +70,6 @@ release:
     - tags
   script:
     - mkdir -p ~/.gem
-    - 'printf "%s\n:rubygems_api_key: %s" "---" "${RUBYGEMSORG_API_KEY}" > ~/.gem/credentials; chmod 0600 ~/.gem/credentials'
-    - make release
+    - 'printf "%s\n:rubygems_api_key: %s" "---" "${RUBYGEMSORG_API_KEY}" > ~/.gem/credentials'
+    - chmod 0600 ~/.gem/credentials
+    - ./bin/release.sh
