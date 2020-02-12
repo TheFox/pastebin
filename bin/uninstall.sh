@@ -19,4 +19,4 @@ if [[ -z "${GEM_NAME}" ]] ; then
   exit 1
 fi
 
-gem uninstall "${GEM_NAME}" --all --executables
+sudo gem uninstall "${GEM_NAME}" --all --executables
